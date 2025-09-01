@@ -12,22 +12,13 @@ import { LoggerModule } from 'nestjs-pino';
 @Module({
   imports: [
     DatabaseModule,
+    LoggerModule,
     DatabaseModule.forFeature([
       {
         name: ReservationDocument.name,
         schema: ReservationSchema,
       },
     ]),
-    LoggerModule.forRoot({
-      pinoHttp: {
-        transport: {
-          options: {
-            singleLine: true,
-          },
-          target: 'pino-pretty',
-        },
-      },
-    }),
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationsRepository],
